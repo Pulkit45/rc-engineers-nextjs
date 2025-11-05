@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST="{\"components\\\\Footer.tsx -> @/components/OfficeMaps\":{\"id\":\"components\\\\Footer.tsx -> @/components/OfficeMaps\",\"files\":[\"static/chunks/_app-pages-browser_components_OfficeMaps_tsx.js\"]}}"
