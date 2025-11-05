@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   LIGHT THEME TOKENS
+========================= */
+:root{
+  --bg:#f7fafc;            /* page background (very light) */
+  --surface:#ffffff;       /* cards/sections */
+  --text:#0b1220;          /* headings */
+  --muted:#5b6b7f;         /* body text */
+  --primary:#1e66ff;       /* blue */
+  --accent:#08b6c9;        /* cyan accent */
+  --border:#e6ecf5;        /* subtle borders */
+  --shadow:0 12px 30px rgba(16, 24, 40, .08);
+  --nav-h:80px;
+}
+
+html,body{
+  height:100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: theme('fontFamily.sans');
+  scroll-behavior: smooth;
+}
+
+/* =========================
+   PRIMITIVES
+========================= */
+.container{ max-width:1280px; margin:0 auto; padding:0 24px; }
+
+.section{ padding:80px 0; position:relative; }
+
+/* Light cards */
+.card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.card:hover{ 
+  transform: translateY(-4px); 
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn{
+  @apply inline-flex items-center gap-2 font-semibold rounded-xl px-5 py-3 transition-all;
+  border:1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+.btn:hover{ transform: translateY(-2px); }
+
+.btn-primary{
+  color:white;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--primary), #6aa6ff);
+  box-shadow: 0 12px 26px rgba(30,102,255,.22);
+}
+.btn-primary:hover{ filter: brightness(1.03); }
+
+.btn-ghost{
+  background: #f8fbff;
+  color: #0b1220;
+}
+
+/* Inputs */
+input, textarea{
+  background: #fbfdff;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 14px;
+}
+input::placeholder, textarea::placeholder{ color:#98a3b5; }
+input:focus, textarea:focus{
+  outline: none;
+  border-color: rgba(30,102,255,.45);
+  box-shadow: 0 0 0 3px rgba(30,102,255,.15);
+}
+
+/* =========================
+   IMAGE BACKGROUND HELPERS
+========================= */
+/* Use these instead of aurora/grid/noise */
+.hero-photo{
+  position:absolute; inset:0; z-index:-1;
+  background-position:center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+
+/* Remove old dark helpers (no-ops to avoid build errors if still referenced) */
+.hero-aurora, .hero-grid, .hero-noise, .title-ring { display:none !important; }
+
+/* Headline gradient */
+.gradient-text{
+  background: linear-gradient(135deg, #0b1220 0%, #1e40af 50%, #2563eb 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight: 900;
+}
+
+/* Soft shadows for light mode */
+.shadow-soft{ box-shadow: var(--shadow); }
+
+/* Make each section paint a solid base color */
+.section {
+  background: var(--bg);
+}
+
+/* ---- Layout rhythm & header height ---- */
+:root { --nav-h: 72px; }
+@media (min-width: 768px){ :root { --nav-h: 80px; }}
+
+/* ensure hash links (#services) don't hide under sticky header */
+section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
+
+/* normalize vertical rhythm if any section forgot .section */
+main > section { background: var(--bg); }
+
+/* ---- Hero parallax fix (jank-free on mobile) ---- */
+.hero-photo { background-attachment: scroll; }
+@media (min-width: 1024px){
+  .hero-photo { background-attachment: fixed; }
+}
+
+/* optional: slightly lighter cards on hover (matches hero glass boxes) */
+.card:hover{ 
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12), 0 6px 16px rgba(0,0,0,.08);
+}
+
+
